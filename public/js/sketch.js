@@ -1,5 +1,6 @@
 let button;
 let rocketData = null;
+var stars = [];
 
 function preload() {
   httpGet('/getSpacePic', function(response) {
@@ -23,6 +24,19 @@ function setup() {
 
   textAlign(CENTER);
 
+  // set up night sky stars
+  var starColor = color(255, 255, 153);
+  for (var i = 0; i < 50; i++) {
+    stars.push(new Star(
+      random(windowWidth), 
+      random(windowHeight-200),
+      random(2, 5),
+      1,
+      random(5, 8),
+      starColor
+      ));
+  }
+
   frameRate(8);
 }
 
@@ -34,14 +48,15 @@ function draw() {
   var color2 = color(204, 51, 0);
   setGradient(0, 0, windowWidth, windowHeight, color1, color2, "Y");
   
-  var xStar, yStar;
   for (var i = 0; i < 50; i++) {
-    xStar = random(windowWidth);
-    yStar = random(windowHeight-200);
-    noStroke();
-    fill(255, 255, 0);
-    star(xStar, yStar, 4, 1, 6);
+    stars[i].draw();
   }
+  // var xStar, yStar;
+  // for (var i = 0; i < 50; i++) {
+  //   xStar = random(windowWidth);
+  //   yStar = random(windowHeight-200);
+    
+  // }
 
   setupTitle();
 
@@ -133,4 +148,32 @@ function star(x, y, radius1, radius2, npoints) {
     vertex(sx, sy);
   }
   endShape(CLOSE);
+}
+
+class Star {
+  constructor(x, y, r1, r2, n, c) {
+    this.x = x;
+    this.y = y;
+    this.r1 = r1;
+    this.r2 = r2;
+    this.npoints = n;
+    this.color = c;
+  }
+
+  // star functions
+  draw() {
+    noStroke();
+    fill(this.color);
+    star(this.x, this.y, this.r1, this.r2, this.npoints);
+    this.x += (random(4) - 2);
+    this.y += (random(4) - 2);
+    if (this.r1 >= 8) {
+      this.r1--;
+    } else if (this.r1 <= 2) {
+      this.r1++;
+    } else {
+      this.r1 += random(-1, 1);
+    }
+
+  }
 }
