@@ -23,11 +23,13 @@ function setup() {
 
   textAlign(CENTER);
 
-  frameRate(10);
+  frameRate(8);
 }
 
 // --------------------------------------------------------
 function draw() {
+
+  // for stars in the night sky
   var color1 = color(0, 0, 153);
   var color2 = color(204, 51, 0);
   setGradient(0, 0, windowWidth, windowHeight, color1, color2, "Y");
@@ -38,7 +40,7 @@ function draw() {
     yStar = random(windowHeight-200);
     noStroke();
     fill(255, 255, 0);
-    ellipse(xStar, yStar, 2, 2);
+    star(xStar, yStar, 4, 1, 6);
   }
 
   setupTitle();
@@ -49,13 +51,13 @@ function draw() {
 
   if (rocketData) {
 
-    // do something with the data!
+    // draw the launch info and bullet stars
     for (var i = 0; i < rocketData.length; i++) {
       //🚀!!
       stroke(255, 255, 0);
-      star(x, startingY + (30 * i) - rad/2, i, rad, i + 2);
+      star(x, startingY + (35 * i) - rad/2, i, rad, i + 2);
       noStroke();
-      createRocketInfo(rocketData[i], x + rad + 10, startingY + (30 * i));
+      createRocketInfo(rocketData[i], x + rad + 10, startingY + (35 * i));
     }
   }
 }
@@ -92,7 +94,7 @@ function createRocketInfo(rocket, xPos, yPos) {
   let endDate = rocket.windowend;
   let content = "\"" + name + "\" scheduled launch between " + startDate + " and " + endDate;
 
-  textSize(16);
+  textSize(18);
   text(content, xPos, yPos);
 }
 
