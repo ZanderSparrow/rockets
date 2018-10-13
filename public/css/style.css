@@ -1,0 +1,16 @@
+html, body {
+  margin: 0 auto;
+}
+
+button#films-btn {
+  font-size: 16px;
+  height: 48px;
+  width: 200px;
+  background: white;
+  border-radius: 2px;
+  border: 1px solid #494949;
+}
+
+button#films-btn:hover {
+  cursor: pointer;
+}
