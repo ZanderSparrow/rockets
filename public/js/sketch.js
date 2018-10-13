@@ -3,10 +3,7 @@ let rocketData = null;
 var stars = [];
 
 function preload() {
-  httpGet('/getSpacePic', function(response) {
-    let spaceImg = loadImage(JSON.parse(response).url);
-    console.log(spaceImg);
-  });
+  // Run async functions
 }
 
 function setup() {
@@ -44,8 +41,8 @@ function setup() {
 function draw() {
 
   // for stars in the night sky
-  var color1 = color(0, 0, 153);
-  var color2 = color(204, 51, 0);
+  var color1 = color(0, 0, 111);
+  var color2 = color(190, 42, 0);
   setGradient(0, 0, windowWidth, windowHeight, color1, color2, "Y");
   
   for (var i = 0; i < 50; i++) {
@@ -113,7 +110,7 @@ function createRocketInfo(rocket, xPos, yPos) {
   text(content, xPos, yPos);
 }
 
-
+// --------------------------------------------------------
 function setGradient(x, y, w, h, c1, c2, axis) {
   noFill();
 
@@ -135,6 +132,7 @@ function setGradient(x, y, w, h, c1, c2, axis) {
   }
 }
 
+// --------------------------------------------------------
 function star(x, y, radius1, radius2, npoints) {
   var angle = TWO_PI / npoints;
   var halfAngle = angle/2.0;
@@ -150,6 +148,7 @@ function star(x, y, radius1, radius2, npoints) {
   endShape(CLOSE);
 }
 
+// --------------------------------------------------------
 class Star {
   constructor(x, y, r1, r2, n, c) {
     this.x = x;
